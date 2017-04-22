@@ -38,13 +38,13 @@ while(my $info = <$fh>){
 			print "$person is not exist in the network\n";
 			# Add this person to the network
 			$people{$person}=$num_people++;
-			$friendships{$person}=\my @temp;
+			$friendships{$people{$person}}=\my @temp;
 			print "$person is taking the value $people{$person}\n";
 		}
 	}
 	# Add this friendship
-	push @{$friendships{$friend_1}}, $friend_2;
-	push @{$friendships{$friend_2}}, $friend_1;
+	push @{$friendships{$people{$friend_1}}}, $people{$friend_2};
+	push @{$friendships{$people{$friend_2}}}, $people{$friend_1};
 }
 close $fh 
 	or die "Couldn't close File : $_";
