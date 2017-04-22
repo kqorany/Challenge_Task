@@ -20,20 +20,23 @@ my $network_file = $ARGV[0];
 open my $fh,'<',$network_file 
 	or die "Can't open File : $_";
 	
-# Check the format of the file
+### Future Work ###	
+#  Add logic here to check that the 
+#  format of the input file is fine       
+
 
 # Read the file
 while(my $info = <$fh>){
 	chomp($info	);
+	# Split the names of friends
 	my ($friend_1,$friend_2) = split /,/,$info;
 	foreach my $person ($friend_1,$friend_2){
 		if(exists $people{$person}){
-			# This person is already added
-			print "$person is exist in the netwrok before with value $people{$person}\n";
-		
+			# This person is already added to the network
+			print "$person is already added to the network with value $people{$person}\n";
 		} else {
 			print "$person is not exist in the network\n";
-			# Add this person
+			# Add this person to the network
 			$people{$person}=$num_people++;
 			$friendships{$person}=\my @temp;
 			print "$person is taking the value $people{$person}\n";
