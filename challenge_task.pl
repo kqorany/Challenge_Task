@@ -29,7 +29,7 @@ while(my $info = <$fh>){
 	foreach my $person ($friend_1,$friend_2){
 		if(exists $people{$person}){
 			# This person is already added
-			print "$pearson is exist in the netwrok before with value $people{$person}\n";
+			print "$person is exist in the netwrok before with value $people{$person}\n";
 		
 		} else {
 			print "$person is not exist in the network\n";
