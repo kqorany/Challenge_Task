@@ -2,8 +2,6 @@ use strict;       # The strict pragma
 use warnings;     # The warnings pragma
 use diagnostics;  # The diagnostics pragma
 
-use Data::Dumper;
-
 ###########################################################
 #  This program determines the total number of people in  #
 #  a social network, in addition, determining the minimum #
@@ -26,9 +24,12 @@ sub min_ties{
 		die "The two names must be different\n";
 	}
 	
-	if (!(exists $people{$person_1}) || !(exists $people{$person_2})){
-		die "One of the names you provide isn't in the network\n
-		     Enter two names from the network and run again\n";
+	if (!(exists $people{$person_1})){
+		die "The $person_1 isn't in the network\n
+		     Please, enter names from the network and run again\n";
+	}elsif (!(exists $people{$person_2})){
+		die "The $person_2 isn't in the network\n
+		     Please, enter names from the network and run again\n";
 	}
 	
 	# Distance from the source
@@ -47,7 +48,7 @@ sub min_ties{
 		$BFS_Info{$i}=[(undef,undef,undef)];
 	}
 	
-	# A queue to save the unvisited branches
+	# A queue to save the unvisited persons
 	my @temp_queue;
 	
 	# The source
@@ -57,7 +58,7 @@ sub min_ties{
 	
 	while(@temp_queue > 0){ # check the length of the queue
 		$predecessor = shift @temp_queue;
-		$distance++;
+		$distance = $BFS_Info{$predecessor}[0]+1;
 		
 		# Check the connect persons with the $predecessor
 		foreach my $index (@{$friendships{$predecessor}}){
@@ -106,8 +107,9 @@ close $fh
 	or die "Couldn't close File : $_";
 	
 print "The number of persons in the network is (($num_people))\n";
+print "People:: [";
 print "<$_>  " for keys %people;
-print "\n";
+print "]\n";
 
 # Defualt values in case the user forget to provide them
 $ARGV[1] ||= 'STACEY_STRIMPLE';
@@ -118,7 +120,7 @@ my %result = min_ties($ARGV[1],$ARGV[2]);
 my %reverse_people = reverse %people;
 
 my $num_ties = $result{$people{$ARGV[2]}}[0];
-print "The minimum number of ties between $ARGV[1] and $ARGV[2] is (($num_ties))\n";
+print "The minimum number of ties between <$ARGV[1]> and <$ARGV[2]> is (($num_ties))\n";
 print "Ties:: ";
 
 my $current = $ARGV[2];
