@@ -1,14 +1,16 @@
 Software Challenge Task implementation in Perl
 ==============================================
 
-##Description
+Description
+===========
 
 The program determines the total number of people in  
 a social network, in addition, determining the minimum 
 ties between two members of the network
 -----------------------------------------------------------------------------
 
-##Usage
+Usage
+=====
 
 This program takes three arguments as inputs::
 
@@ -41,7 +43,8 @@ $ perl challenge_task.pl
 ```
 -----------------------------------------------------------------------------------
 
-##Output
+Output
+======
 
 * The program will create an OUT file, from the same folder you are calling the 
 program, to save the outputs in addition printing summery of the results on the 
