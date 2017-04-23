@@ -10,7 +10,7 @@ vertices, where the key of the hash is the person name and the value is an index
 Whereas I used the FRIENDSHIPs hash to save the edges, where the key is the index and the value is an 
 array to save the friends' indexes of this index. This method is known as an Adjacency list style.
 
-*Example, assume we have a small network such as the following:
+* Example, assume we have a small network such as the following:
 ```
         KHALED_ABDELFADEEL,AMR_HASSAN
 	ADAM_SHABIB,OMER_FAROUQ
