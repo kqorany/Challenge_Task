@@ -78,7 +78,7 @@ sub min_ties{
 
 # Open the social network file
 my $network_file = $ARGV[0];
-open my $fh,'<',$network_file 
+open my $input_fh,'<',$network_file 
 	or die "Can't open File : $_";
 	
 ### Future Work ###	
@@ -86,7 +86,7 @@ open my $fh,'<',$network_file
 
 
 # Read the file
-while(my $info = <$fh>){
+while(my $info = <$input_fh>){
 	chomp($info	);
 	# Split the names of friends
 	my ($friend_1,$friend_2) = split /,/,$info;
@@ -103,13 +103,20 @@ while(my $info = <$fh>){
 	push @{$friendships{$people{$friend_1}}}, $people{$friend_2};
 	push @{$friendships{$people{$friend_2}}}, $people{$friend_1};
 }
-close $fh 
+close $input_fh
 	or die "Couldn't close File : $_";
 	
+# Open a file to save the outputs
+my $out_file= 'OUT.txt';
+open my $output_fh, '>', $out_file
+	or die "Can't open File : $_";
+	
+print $output_fh "The number of persons in the network is (($num_people))\n";
+# Print on terminal as well
 print "The number of persons in the network is (($num_people))\n";
-print "People:: [";
-print "<$_>  " for keys %people;
-print "]\n";
+print $output_fh "People:: [";
+print $output_fh "<$_>  " for keys %people;
+print $output_fh "]\n";
 
 # Defualt values in case the user forget to provide them
 $ARGV[1] ||= 'STACEY_STRIMPLE';
@@ -120,8 +127,10 @@ my %result = min_ties($ARGV[1],$ARGV[2]);
 my %reverse_people = reverse %people;
 
 my $num_ties = $result{$people{$ARGV[2]}}[0];
+print $output_fh "The minimum number of ties between <$ARGV[1]> and <$ARGV[2]> is (($num_ties))\n";
+# Print on terminal as well
 print "The minimum number of ties between <$ARGV[1]> and <$ARGV[2]> is (($num_ties))\n";
-print "Ties:: ";
+print $output_fh "Ties:: ";
 
 my $current = $ARGV[2];
 my $current_index = $people{$ARGV[2]};
@@ -131,8 +140,11 @@ my $predecessor_index;
 for (my $i=0; $i< $num_ties; $i++) {
 	$predecessor_index = $result{$current_index}[1];
 	$predecessor = $reverse_people{$predecessor_index};
-	print " [<$current> friend of <$predecessor>] ";
+	print $output_fh " [<$current> friend of <$predecessor>] ";
 	$current_index = $predecessor_index;
 	$current = $predecessor;
 }
-print"\n";
+print $output_fh "\n";
+
+close $output_fh
+	or die "Couldn't close File : $_";
