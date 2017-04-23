@@ -12,7 +12,7 @@ Usage
 
 This program takes three arguments as inputs::
 
-* The first argument is the social netwrok input file as a txt file. Each line in the file should provides the names (without any spaces inbetween) of two people who are friends. The names of friends should be seperated by comma.
+* The first argument is the social netwrok input file as a txt file. Each line in the file should provides the names (without any spaces in between) of two people who are friends. The names of friends should be seperated by comma.
 Example of the network file:
 ```
         KHALED_ABDELFADEEL,AMR_HASSAN
