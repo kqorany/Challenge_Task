@@ -1,4 +1,4 @@
-Software Challenge Task implementation in Perl
+Find the minimum ties between two persons in a network in Perl
 ==============================================
 
 Description
