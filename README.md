@@ -4,8 +4,7 @@ Software Challenge Task implementation in Perl
 Description
 ===========
 
-The program determines the total number of people in  
-a social network, in addition, determining the minimum 
+The program determines the total number of people in  a social network, in addition, determining the minimum 
 ties between two members of the network
 
 Usage
