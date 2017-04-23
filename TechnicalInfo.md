@@ -4,11 +4,7 @@ Some Technical Details
 GRAPH
 =====
 
-* The social network problem is a typical problem of the undirected unweighted graph (vertices, edges). 
-To implement the graph, I used two hashs: PEOPLE and FRIENDSHIPS. The PEOPLE hash is used to save the 
-vertices, where the key of the hash is the person name and the value is an index of this name. 
-Whereas, I used the FRIENDSHIPs hash to save the edges, where the key is the index and the value is an 
-array to save the friends' indexes of this index. This method is known as an Adjacency list style.
+* The social network problem is a typical application of the undirected unweighted graph (vertices, edges). To implement the graph, I used two hashs: PEOPLE and FRIENDSHIPS. The PEOPLE hash is used to save the vertices, where the key of the hash is the person name and the value is an index of this name.  Whereas, I used the FRIENDSHIPs hash to save the edges, where the key is the index and the value is an  array to save the friends' indexes of this index. This method is known as an Adjacency list style.
 
 * Example, assume we have a small network such as the following:
 ```
