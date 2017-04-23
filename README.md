@@ -7,7 +7,6 @@ Description
 The program determines the total number of people in  
 a social network, in addition, determining the minimum 
 ties between two members of the network
------------------------------------------------------------------------------
 
 Usage
 =====
@@ -20,7 +19,7 @@ The names of friends should be seperated by comma.
 Example of the network file:
 ```
         KHALED_ABDELFADEEL,AMR_HASSAN
-		ADAM_SHABIB,OMER_FAROUQ
+	ADAM_SHABIB,OMER_FAROUQ
 		.
 		.
 		.
@@ -41,7 +40,6 @@ default persons who are STACEY_STRIMPLE and RICH_OMLI
 ```bash
 $ perl challenge_task.pl
 ```
------------------------------------------------------------------------------------
 
 Output
 ======
@@ -49,4 +47,3 @@ Output
 * The program will create an OUT file, from the same folder you are calling the 
 program, to save the outputs in addition printing summery of the results on the 
 terminal.
------------------------------------------------------------------------------------
