@@ -19,17 +19,17 @@ my %friendships;
 # two persons in a network
 sub min_ties{
 	my ($person_1,$person_2) = @_;
-	
+
 	if ($person_1 eq $person_2){
 		die "The two names must be different\n";
 	}
 	
 	if (!(exists $people{$person_1})){
-		die "The $person_1 isn't in the network\n
-		     Please, enter names from the network and run again\n";
+		die "$person_1 isn't in the network\n
+		     Please, enter a name from the network and run again\n";
 	}elsif (!(exists $people{$person_2})){
-		die "The $person_2 isn't in the network\n
-		     Please, enter names from the network and run again\n";
+		die "$person_2 isn't in the network\n
+		     Please, enter a name from the network and run again\n";
 	}
 	
 	# Distance from the source
@@ -39,7 +39,7 @@ sub min_ties{
 	
 	# BFS_Info{index} => (distance, predecessor, visited)
 	# Distance - represent the number of people way from the source
-	# Predecessor - the predecessor toward the source
+	# Predecessor - the predecessor of index toward the source
 	# Visited - this person is visited beofre or not
 	my %BFS_Info;
 	
@@ -48,10 +48,10 @@ sub min_ties{
 		$BFS_Info{$i}=[(undef,undef,undef)];
 	}
 	
-	# A queue to save the unvisited persons
+	# A queue (First in first out) to save the unvisited persons
 	my @temp_queue;
 	
-	# The source
+	# Update the BFS Info of the source
 	$BFS_Info{$people{$person_1}}=[($distance,$predecessor,1)];
 	
 	unshift @temp_queue, $people{$person_1};
@@ -60,13 +60,14 @@ sub min_ties{
 		$predecessor = shift @temp_queue;
 		$distance = $BFS_Info{$predecessor}[0]+1;
 		
-		# Check the connect persons with the $predecessor
+		# Check the connect persons to the $predecessor
 		foreach my $index (@{$friendships{$predecessor}}){
 			if (!$BFS_Info{$index}[2]){ # Visited before or not
 				unshift @temp_queue, $index;
 				# Update the BSF_Info hash
 				$BFS_Info{$index}=[($distance,$predecessor,1)];
 			}
+			# Return to reduce the processing time
 			if ($index == $people{$person_2}){
 				# Found the target
 				return %BFS_Info;
@@ -82,7 +83,7 @@ open my $input_fh,'<',$network_file
 	or die "Can't open File : $_";
 	
 ### Future Work ###	
-#  Add logic here to check that the format of the input file is fine       
+#  Add logic here to check the format of the input file      
 
 
 # Read the file
@@ -132,11 +133,11 @@ print $output_fh "The minimum number of ties between <$ARGV[1]> and <$ARGV[2]> i
 print "The minimum number of ties between <$ARGV[1]> and <$ARGV[2]> is (($num_ties))\n";
 print $output_fh "Ties:: ";
 
+# Retrive the names of ties
 my $current = $ARGV[2];
 my $current_index = $people{$ARGV[2]};
 my $predecessor;
 my $predecessor_index;
-
 for (my $i=0; $i< $num_ties; $i++) {
 	$predecessor_index = $result{$current_index}[1];
 	$predecessor = $reverse_people{$predecessor_index};
