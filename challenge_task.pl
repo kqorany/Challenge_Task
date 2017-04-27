@@ -54,7 +54,7 @@ sub min_ties{
 	# Update the BFS Info of the source
 	$BFS_Info{$people{$person_1}}=[($distance,$predecessor,1)];
 	
-	unshift @temp_queue, $people{$person_1};
+	push @temp_queue, $people{$person_1};
 	
 	while(@temp_queue > 0){ # check the length of the queue
 		$predecessor = shift @temp_queue;
@@ -63,7 +63,7 @@ sub min_ties{
 		# Check the connect persons to the $predecessor
 		foreach my $index (@{$friendships{$predecessor}}){
 			if (!$BFS_Info{$index}[2]){ # Visited before or not
-				unshift @temp_queue, $index;
+				push @temp_queue, $index;
 				# Update the BSF_Info hash
 				$BFS_Info{$index}=[($distance,$predecessor,1)];
 			}
